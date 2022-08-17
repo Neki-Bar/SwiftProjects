@@ -23,7 +23,7 @@ struct Reserve {
 
     private let underZeroHandler: () -> Void
 
-    init(maxValue: Int, underZeroHandler: @escaping () -> Void) { // про сбегание сам не додумался компилятор подсказал
+    init(maxValue: Int, underZeroHandler: @escaping () -> Void = {}) { // про сбегание сам не додумался компилятор подсказал
         self.underZeroHandler = underZeroHandler
         self.maxValue = maxValue
     }
@@ -33,8 +33,8 @@ final class SimpleTamagotchi: Tamagotchi {
     //Знатно поигрался с пропертями. Инкапсулировал логику пропертей чтоб для каждой реализации Tamagotchi не
     //писать простыню из приватных и вычисляемых пропертей и их геттеров и сеттеров
     @Reserve(maxValue: 5, underZeroHandler: zeroFoodHandler ) var foodReserve: Int
-    @Reserve(maxValue: 5, underZeroHandler: {} ) var waterReserve: Int
-    @Reserve(maxValue: 5, underZeroHandler: {} ) var sleepReserve: Int
+    @Reserve(maxValue: 5) var waterReserve: Int
+    @Reserve(maxValue: 5) var sleepReserve: Int
 
     private static var zeroFoodHandler = {
         print("Your tamagotchi is dead!")
@@ -66,8 +66,8 @@ final class SimpleTamagotchi: Tamagotchi {
 
 final class WorkingTamagotchi{
     @Reserve(maxValue: 5, underZeroHandler: zeroFoodHandler ) var foodReserve: Int
-    @Reserve(maxValue: 5, underZeroHandler: {} ) var waterReserve: Int
-    @Reserve(maxValue: 5, underZeroHandler: {} ) var sleepReserve: Int
+    @Reserve(maxValue: 5) var waterReserve: Int
+    @Reserve(maxValue: 5) var sleepReserve: Int
 
     private static var zeroFoodHandler = {
         print("Your tamagotchi is dead!")
@@ -143,16 +143,3 @@ Food: 0, water: 0, sleep: 0
 Your tamagotchi is dead!
 Your tamagotchi is dead!
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
