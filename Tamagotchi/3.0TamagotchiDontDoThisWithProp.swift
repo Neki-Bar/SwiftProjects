@@ -22,6 +22,7 @@ struct Reserve {
     }
 
     var underZeroHandler: () -> Void = {} // underZeroHandler
+    оавдылоалдвыоадлвыоалдвыоаждлывова
 
     init(maxValue: Int) {
         self.maxValue = maxValue
