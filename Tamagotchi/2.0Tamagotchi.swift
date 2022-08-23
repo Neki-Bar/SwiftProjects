@@ -9,19 +9,18 @@ protocol Tamagotchi: AnyObject {
     func sleep()
 }
 
-@propertyWrapper
 struct Reserve {
     private let maxValue: Int
-    private var value: Int = 0
-    var wrappedValue: Int {
+    private var _value: Int = 0
+    var value: Int {
         set { 
-            if newValue < 0 { projectedValue() }
-            value =  newValue > maxValue ? maxValue : newValue 
+            if newValue < 0 { underZeroHandler() }
+            _value =  newValue > maxValue ? maxValue : newValue 
         } 
-        get { return value }
+        get { return _value }
     }
 
-    var projectedValue: () -> Void = {} // underZeroHandler
+    var underZeroHandler: () -> Void = {}
 
     init(maxValue: Int) {
         self.maxValue = maxValue
@@ -29,11 +28,21 @@ struct Reserve {
 }
 
 final class SimpleTamagotchi: Tamagotchi {
-    //Знатно поигрался с пропертями. Инкапсулировал логику пропертей чтоб для каждой реализации Tamagotchi не
-    //писать простыню из приватных и вычисляемых пропертей и их геттеров и сеттеров
-    @Reserve(maxValue: 5) var foodReserve: Int
-    @Reserve(maxValue: 5) var waterReserve: Int
-    @Reserve(maxValue: 5) var sleepReserve: Int
+    var _foodReserve: Reserve = Reserve(maxValue: 5)
+    var _waterReserve: Reserve = Reserve(maxValue: 5)
+    var _sleepReserve: Reserve = Reserve(maxValue: 5)
+    var foodReserve: Int {
+        get { return _foodReserve.value }
+        set { _foodReserve.value = newValue }
+    }
+    var waterReserve: Int {
+        get { return _waterReserve.value }
+        set { _waterReserve.value = newValue }
+    }
+    var sleepReserve: Int {
+        get { return _sleepReserve.value }
+        set { _sleepReserve.value = newValue }
+    }
 
     private var zeroFoodHandler = {
         print("Your tamagotchi is dead!")
@@ -58,19 +67,31 @@ final class SimpleTamagotchi: Tamagotchi {
         sleepReserve -= 2
     }
 
-    func addFoodHandler() {
-        $foodReserve = zeroFoodHandler
-    }
-
     func printPropeprties() {
         print("Food: \(foodReserve), water: \(waterReserve), sleep: \(sleepReserve)")
+    }
+
+    init() {
+        _foodReserve.underZeroHandler = zeroFoodHandler
     }
 }
 
 final class WorkingTamagotchi{
-    @Reserve(maxValue: 5) var foodReserve: Int
-    @Reserve(maxValue: 5) var waterReserve: Int
-    @Reserve(maxValue: 5) var sleepReserve: Int
+    var _foodReserve: Reserve = Reserve(maxValue: 5)
+    var _waterReserve: Reserve = Reserve(maxValue: 5)
+    var _sleepReserve: Reserve = Reserve(maxValue: 5)
+    var foodReserve: Int {
+        get { return _foodReserve.value }
+        set { _foodReserve.value = newValue }
+    }
+    var waterReserve: Int {
+        get { return _waterReserve.value }
+        set { _waterReserve.value = newValue }
+    }
+    var sleepReserve: Int {
+        get { return _sleepReserve.value }
+        set { _sleepReserve.value = newValue }
+    }
 
     private var zeroFoodHandler = {
         print("Your tamagotchi is dead!")
@@ -86,12 +107,12 @@ final class WorkingTamagotchi{
         sleepReserve -= 3
     }
 
-    func addFoodHandler() {
-        $foodReserve = zeroFoodHandler
-    }
-
     func printPropeprties() {
         print("Food: \(foodReserve), water: \(waterReserve), sleep: \(sleepReserve)")
+    }
+
+    init() {
+        _foodReserve.underZeroHandler = zeroFoodHandler
     }
 }
 
@@ -108,7 +129,6 @@ func testSimpleTamagotchi() {
     print("SimpleTamagotchi test")
     let boni: SimpleTamagotchi = SimpleTamagotchi()
     boni.printPropeprties()
-    boni.addFoodHandler()
     boni.eat()
     boni.drink()
     boni.sleep()
@@ -123,7 +143,6 @@ func testWorkingTamagotchi() {
     print("WorkingTamagotchi test")
     let boni: WorkingTamagotchi = WorkingTamagotchi()
     boni.printPropeprties()
-    boni.addFoodHandler()
     boni.eat()
     boni.drink()
     boni.sleep()
