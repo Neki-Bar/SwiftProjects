@@ -15,7 +15,7 @@ class AppCoordinator: Coordinator {
     }
     
     func start(){
-        var homeCoordinator = HomeCoordinator(navigationController: navigationController)
+        let homeCoordinator = HomeCoordinator(navigationController: navigationController)
         
         homeCoordinator.start()
     }

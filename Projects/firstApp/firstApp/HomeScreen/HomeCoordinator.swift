@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Moya
 
-class HomeCoordinator: Coordinator {
+final class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
     
     init(navigationController: UINavigationController){
@@ -15,7 +16,9 @@ class HomeCoordinator: Coordinator {
     }
     
     func start(){
-        let homeViewController = HomeViewController()
+        let provider = MoyaProvider<AccuWeather>()
+        let homeViewModel = HomeViewModel(provider: provider)
+        let homeViewController = HomeViewController(viewModel: homeViewModel)
         navigationController.pushViewController(homeViewController, animated: false)
     }
 }
