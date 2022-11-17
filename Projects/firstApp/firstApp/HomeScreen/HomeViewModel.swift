@@ -25,7 +25,6 @@ final class HomeViewModel{
             switch result{
             case .success(let response):
                 print(response)
-                print(response.)
 //                let decoder = JSONDecoder()
 //                decoder.dateDecodingStrategy = .millisecondsSince1970
 //                let currentWeather: CurrentDayModel = try! decoder.decode(CurrentDayModel.self, from: response.data)

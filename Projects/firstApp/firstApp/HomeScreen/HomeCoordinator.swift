@@ -18,7 +18,13 @@ final class HomeCoordinator: Coordinator {
     func start(){
         let provider = MoyaProvider<AccuWeather>()
         let homeViewModel = HomeViewModel(provider: provider)
-        let homeViewController = HomeViewController(viewModel: homeViewModel)
-        navigationController.pushViewController(homeViewController, animated: false)
+        let homeViewController = HomeViewController(viewModel: homeViewModel, coordinator: self)
+        navigationController.pushViewController(homeViewController, animated: true)
+    }
+    
+    func toDetail() {
+        let detailViewController = DetailController()
+
+        navigationController.pushViewController(detailViewController, animated: true)
     }
 }
