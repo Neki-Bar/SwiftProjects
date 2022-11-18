@@ -62,21 +62,28 @@ final class CurrentDayCell: UICollectionViewCell{
     }()
     
     func setupView(){
-        setupLayer()
+        insertBackground()
         setupLayout()
         
     }
     
-    private func setupLayer(){
+    private var back: CALayer?
+    
+    func insertBackground(mul: CGFloat = 1.0) {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = layer.bounds
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: layer.bounds.width, height: layer.bounds.height * mul)
         gradientLayer.colors = [UIColor(hex: "#4f7ffaff")?.cgColor, UIColor(hex: "#335fd1ff")?.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.1, y: 0.3)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         gradientLayer.cornerRadius = 12
-        
-        layer.insertSublayer(gradientLayer, at: 5)
+        back = gradientLayer
+        layer.insertSublayer(gradientLayer, at: 7)
     }
+    
+    func removeBackground() {
+        back?.removeFromSuperlayer()
+    }
+    
     
     private func setupLayout(){
         contentView.addSubview(dateLabel)
