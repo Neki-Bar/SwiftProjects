@@ -10,8 +10,11 @@ import Moya
 
 final class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
+    let detailCoordinator: DetailCoordinator
+
     init(navigationController: UINavigationController){
         self.navigationController = navigationController
+        detailCoordinator = DetailCoordinator(navigationController: navigationController)
     }
     
     func start(){
@@ -22,8 +25,7 @@ final class HomeCoordinator: Coordinator {
     }
     
     func toDetail() {
-        let detailViewController = DetailController()
-
-        navigationController.pushViewController(detailViewController, animated: true)
+        detailCoordinator.start()
     }
+    
 }

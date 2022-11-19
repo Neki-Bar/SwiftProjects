@@ -51,7 +51,6 @@ final class HomeViewController: UIViewController {
     var homeCollectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<SectionId, UUID>!
     
-    let animator = Animator()
     
     var list1 = [UUID()]
     var list2 = [UUID(), UUID(), UUID(), UUID(), UUID(), UUID()]
@@ -61,6 +60,7 @@ final class HomeViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
         self.coordinator = coordinator;
+        
     }
     
     required init?(coder: NSCoder) {
@@ -76,6 +76,7 @@ final class HomeViewController: UIViewController {
         layoutSubviews()
         createDataSource()
         reloadData()
+        
         navigationController?.delegate = self
     }
 
@@ -180,10 +181,12 @@ final class HomeViewController: UIViewController {
         ])
     }
     
+ 
+
     func createCurrentCityLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(450))//193
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(193))//193
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 10, bottom: 0, trailing: 10)
@@ -234,21 +237,11 @@ extension HomeViewController: UICollectionViewDelegate {
     }
 }
 
-//extension HomeViewController: UIViewControllerTransitioningDelegate {
-//    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        print("return animator")
-//        return animator
-//    }
-//    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        return nil
-//    }
-//}
-
 
 
 extension HomeViewController: UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return animator
+        return Animator(present: operation == .push)
     }
 }
 

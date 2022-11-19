@@ -28,10 +28,19 @@ enum CId{
 
 
 class DetailController: UIViewController {
+    var coordinator: DetailCoordinator!
+    
     var detailCollectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<SecId, UUID>!
     
-    let animator = Animator()
+    init(coordinator: DetailCoordinator) {
+        super.init(nibName: nil, bundle: nil)
+        self.coordinator = coordinator;
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var list1 = [UUID()]
     var list2 = [UUID(), UUID(), UUID(), UUID(), UUID(), UUID()]
@@ -45,11 +54,15 @@ class DetailController: UIViewController {
         createDataSource()
         reloadData()
         
+    }
+    
+    override func viewDidLayoutSubviews() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
+        gradientLayer.frame = CGRect(x: 10, y: 30, width: detailCollectionView.bounds.width - 20, height: 730)
         gradientLayer.colors = [UIColor(hex: "#4f7ffaff")?.cgColor, UIColor(hex: "#335fd1ff")?.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.1, y: 0.3)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.cornerRadius = 12
         
         let background = UIView()
         background.layer.addSublayer(gradientLayer)
@@ -135,7 +148,7 @@ class DetailController: UIViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(193))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 10, bottom: 0, trailing: 10)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 10, bottom: 0, trailing: 10)
         return section
     }
     
@@ -143,11 +156,11 @@ class DetailController: UIViewController {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(96), heightDimension: .estimated(107))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(91), heightDimension: .estimated(107))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 4)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 10, bottom: 0, trailing: 0)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 0)
         return section
     }
 }
@@ -157,7 +170,7 @@ class DetailController: UIViewController {
 extension DetailController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-//            coordinator.toDetail()
+            coordinator.toHome()
         }
     }
 }

@@ -9,39 +9,109 @@ import Foundation
 import UIKit
 
 class Animator: NSObject, UIViewControllerAnimatedTransitioning {
+    
+    let present: Bool!
+    
+    init(present: Bool) {
+        self.present = present
+    }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 1
+        return 0.3
         }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard
-            let toView = transitionContext.view(forKey: .to),
-            let fromView = transitionContext.view(forKey: .from),
-            let coll = fromView.subviews[0] as? UICollectionView,
-            let cell = coll.cellForItem(at: IndexPath(row: 0, section: 0)) as? CurrentDayCell
-        else {
-            print("coll is nil")
-            return
-        }
-        
-        let fr = cell.frame
-        print(fr)
-        toView.center = CGPoint(x: fr.midX , y: fr.midY + fr.origin.y + toView.safeAreaInsets.top)
-        toView.transform = CGAffineTransform(scaleX: cell.frame.width / toView.frame.width, y: cell.frame.height / toView.frame.height)
-        toView.layer.cornerRadius = 12
-        transitionContext.containerView.addSubview(toView)
         
         let duration = self.transitionDuration(using: transitionContext)
-        UIView.animate(withDuration: duration,
-                       delay: 0,
-                       options: .curveEaseInOut,
-                       animations: {
-            toView.transform = .identity
-            toView.center = fromView.center
-        }, completion: { _ in
-            transitionContext.completeTransition(true)
-        })
+        
+        if present {
+            
+            guard
+                let fromController = transitionContext.viewController(forKey: .from) as? HomeViewController,
+                let toView = transitionContext.view(forKey: .to),
+                let fromView = transitionContext.view(forKey: .from),
+                let coll = fromView.subviews[0] as? UICollectionView
+            else {
+                return
+            }
+            
+            let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+                switch SectionId(rawValue: sectionIndex)! {
+                case .currentDaySection:
+                    return createCurrentCityLayout()
+                case .perHourWeatherSection:
+                    return fromController.createPerHourWeatherLayout()
+                case .perDaySection:
+                    return fromController.createAdditionalCityLayout()
+                }
+            }
+            
+            
+            UIView.animate(withDuration: 0.3,
+                           animations: {
+                                coll.scrollsToTop = true
+                            },
+                           completion: {_ in
+                                animateCell()
+                            })
+            func animateCell() {
+                coll.setCollectionViewLayout(layout, animated: true, completion: {_ in
+                    transitionContext.containerView.addSubview(toView)
+                    toView.alpha = 0
+                    
+                    UIView.animate(withDuration: duration,
+                                   animations: {
+                        toView.alpha = 1
+                    }, completion: { _ in
+                        transitionContext.completeTransition(true)
+                    })
+                })
+            }
+            
+        } else {
+            guard
+                let toController = transitionContext.viewController(forKey: .to) as? HomeViewController,
+                let toView = transitionContext.view(forKey: .to),
+                let fromView = transitionContext.view(forKey: .from),
+                let coll = toView.subviews[0] as? UICollectionView
+            else {
+                print("guard")
+                return
+            }
+            transitionContext.containerView.addSubview(toView)
+            
+            
+            
+            
+
+            UIView.animate(withDuration: 0.3, animations: {
+                fromView.alpha = 0
+            }, completion: { _ in
+                coll.setCollectionViewLayout(toController.createCompositionalLayout(), animated: true, completion: { _ in
+                    transitionContext.completeTransition(true)
+                })
+            })
+            
+            
+            
+        }
+        
+        
+        
+        
+        func createCurrentCityLayout() -> NSCollectionLayoutSection {
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(730))
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 10, bottom: 50, trailing: 10)
+            return section
+        }
+        
+        
+        
+       
     }
     
     

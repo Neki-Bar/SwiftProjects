@@ -64,14 +64,17 @@ final class CurrentDayCell: UICollectionViewCell{
     func setupView(){
         insertBackground()
         setupLayout()
-        
+        clipsToBounds = true
+        layer.cornerRadius = 12
     }
+    
+    
     
     private var back: CALayer?
     
-    func insertBackground(mul: CGFloat = 1.0) {
+    func insertBackground() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: layer.bounds.width, height: layer.bounds.height * mul)
+        gradientLayer.frame = CGRect(x: 0, y: 0, width: layer.bounds.width, height: 770)
         gradientLayer.colors = [UIColor(hex: "#4f7ffaff")?.cgColor, UIColor(hex: "#335fd1ff")?.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0.1, y: 0.3)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
@@ -114,7 +117,7 @@ final class CurrentDayCell: UICollectionViewCell{
             weatherIcon.widthAnchor.constraint(equalToConstant: 128),
             weatherIcon.heightAnchor.constraint(equalTo: weatherIcon.widthAnchor),
             weatherIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 4),
-            weatherIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            weatherIcon.centerYAnchor.constraint(equalTo: self.topAnchor, constant: 96)
         ])
         
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +137,7 @@ final class CurrentDayCell: UICollectionViewCell{
         updateButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             updateButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
-            updateButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24),
+            updateButton.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 169),
             updateButton.heightAnchor.constraint(equalToConstant: 17)
         ])
         updateButton.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)

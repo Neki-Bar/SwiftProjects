@@ -11,11 +11,17 @@ class DetailCoordinator: Coordinator{
     
     var navigationController: UINavigationController
     
+    
     init(navigationController: UINavigationController){
         self.navigationController = navigationController
     }
     
     func start(){
-        
+        let detailViewController = DetailController(coordinator: self)
+        navigationController.pushViewController(detailViewController, animated: true)
+    }
+    
+    func toHome() {
+        navigationController.popViewController(animated: true)
     }
 }
