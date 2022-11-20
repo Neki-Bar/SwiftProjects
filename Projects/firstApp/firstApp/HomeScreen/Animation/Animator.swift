@@ -49,7 +49,8 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             
             UIView.animate(withDuration: 0.3,
                            animations: {
-                                coll.scrollsToTop = true
+                                let offset = CGPoint(x: 0, y: -coll.contentInset.top)
+                                coll.setContentOffset(offset, animated: false)
                             },
                            completion: {_ in
                                 animateCell()
@@ -59,7 +60,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                     transitionContext.containerView.addSubview(toView)
                     toView.alpha = 0
                     
-                    UIView.animate(withDuration: duration,
+                    UIView.animate(withDuration: 0.3,
                                    animations: {
                         toView.alpha = 1
                     }, completion: { _ in
@@ -79,7 +80,8 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                 return
             }
             transitionContext.containerView.addSubview(toView)
-            
+            transitionContext.containerView.addSubview(fromView)
+
             
             
             
@@ -87,6 +89,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             UIView.animate(withDuration: 0.3, animations: {
                 fromView.alpha = 0
             }, completion: { _ in
+
                 coll.setCollectionViewLayout(toController.createCompositionalLayout(), animated: true, completion: { _ in
                     transitionContext.completeTransition(true)
                 })
@@ -105,7 +108,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(730))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 10, bottom: 50, trailing: 10)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 10, bottom: 30, trailing: 10)
             return section
         }
         
