@@ -90,38 +90,49 @@ final class HomeViewController: UIViewController {
         homeCollectionView.register(PerHourWeatherCell.self, forCellWithReuseIdentifier: CellId.perHourWeatherCell.reuseId())
         homeCollectionView.register(PerDayCell.self, forCellWithReuseIdentifier: CellId.perDayCell.reuseId())
         
-        homeCollectionView.register(SectionTitleSupplementary.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId())
+        homeCollectionView.register(SectionTitleSupplementary.self,
+                                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                    withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId())
     }
     
     func createDataSource(){
-        let source = UICollectionViewDiffableDataSource<SectionId, UUID>(collectionView: homeCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: UUID) -> UICollectionViewCell? in
+        let source = UICollectionViewDiffableDataSource<SectionId, UUID>(collectionView: homeCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: UUID) -> UICollectionViewCell? in
             switch SectionId(rawValue: indexPath.section)!{
                 case .currentDaySection:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.currentDayCell.reuseId(), for: indexPath) as? CurrentDayCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.currentDayCell.reuseId(),
+                                                                  for: indexPath) as? CurrentDayCell
                     cell?.setupView()
                     return cell
                 case .perHourWeatherSection:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perHourWeatherCell.reuseId(), for: indexPath) as? PerHourWeatherCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perHourWeatherCell.reuseId(),
+                                                                  for: indexPath) as? PerHourWeatherCell
                     cell?.setupView()
                     return cell
                 case .perDaySection:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perDayCell.reuseId(), for: indexPath) as? PerDayCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perDayCell.reuseId(),
+                                                                  for: indexPath) as? PerDayCell
                     cell?.setupView()
                     return cell
             }
         }
         
-        source.supplementaryViewProvider = { [ weak self ] (collectionView: UICollectionView, elementKind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+        source.supplementaryViewProvider = {
+            (collectionView: UICollectionView, elementKind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             if elementKind == UICollectionView.elementKindSectionHeader {
                 switch SectionId(rawValue: indexPath.section)! {
                     case .currentDaySection:
                         return nil
                     case .perHourWeatherSection:
-                        let header = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId(), for:  indexPath) as? SectionTitleSupplementary
+                        let header = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind,
+                                                                                     withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId(),
+                                                                                     for:  indexPath) as? SectionTitleSupplementary
                         header?.setupView(for: SupplementaryId(rawValue: indexPath.section - 1 )!)
                         return header
                     case .perDaySection:
-                        let header = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind, withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId(), for:  indexPath) as? SectionTitleSupplementary
+                        let header = collectionView.dequeueReusableSupplementaryView(ofKind: elementKind,
+                                                                                     withReuseIdentifier: SupplementaryId.hourlyHeader.reuseId(),
+                                                                                     for:  indexPath) as? SectionTitleSupplementary
                         header?.setupView(for: SupplementaryId(rawValue: indexPath.section - 1 )!)
                         return header
                 }
@@ -186,7 +197,7 @@ final class HomeViewController: UIViewController {
     func createCurrentCityLayout() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(193))//193
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(193))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 10, bottom: 0, trailing: 10)
@@ -204,7 +215,9 @@ final class HomeViewController: UIViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0)
         
         let supplementarySize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(65))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementarySize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementarySize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .topLeading)
         
         section.boundarySupplementaryItems = [header]
         return section
@@ -221,7 +234,9 @@ final class HomeViewController: UIViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
         
         let supplementarySize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(65))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementarySize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: supplementarySize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .topLeading)
         
         section.boundarySupplementaryItems = [header]
         return section
@@ -240,7 +255,11 @@ extension HomeViewController: UICollectionViewDelegate {
 
 
 extension HomeViewController: UINavigationControllerDelegate {
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    {
         return Animator(present: operation == .push)
     }
 }

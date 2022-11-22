@@ -18,7 +18,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
-        }
+    }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
@@ -47,7 +47,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             }
             
             
-            UIView.animate(withDuration: 0.3,
+            UIView.animate(withDuration: duration,
                            animations: {
                                 let offset = CGPoint(x: 0, y: -coll.contentInset.top)
                                 coll.setContentOffset(offset, animated: false)
@@ -55,12 +55,13 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                            completion: {_ in
                                 animateCell()
                             })
+            
             func animateCell() {
                 coll.setCollectionViewLayout(layout, animated: true, completion: {_ in
                     transitionContext.containerView.addSubview(toView)
                     toView.alpha = 0
                     
-                    UIView.animate(withDuration: 0.3,
+                    UIView.animate(withDuration: duration,
                                    animations: {
                         toView.alpha = 1
                     }, completion: { _ in
@@ -79,14 +80,11 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                 print("guard")
                 return
             }
+            
             transitionContext.containerView.addSubview(toView)
             transitionContext.containerView.addSubview(fromView)
 
-            
-            
-            
-
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: duration, animations: {
                 fromView.alpha = 0
             }, completion: { _ in
 
@@ -94,13 +92,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
                     transitionContext.completeTransition(true)
                 })
             })
-            
-            
-            
         }
-        
-        
-        
         
         func createCurrentCityLayout() -> NSCollectionLayoutSection {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -111,11 +103,5 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
             section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 10, bottom: 30, trailing: 10)
             return section
         }
-        
-        
-        
-       
     }
-    
-    
 }

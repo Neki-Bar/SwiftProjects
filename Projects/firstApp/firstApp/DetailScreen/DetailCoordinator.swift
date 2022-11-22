@@ -7,16 +7,16 @@
 
 import UIKit
 
-class DetailCoordinator: Coordinator{
+class DetailCoordinator: Coordinator {
     
     var navigationController: UINavigationController
     
     
-    init(navigationController: UINavigationController){
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start(){
+    func start() {
         let detailViewController = DetailController(coordinator: self)
         navigationController.pushViewController(detailViewController, animated: true)
     }

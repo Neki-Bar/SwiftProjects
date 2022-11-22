@@ -19,7 +19,11 @@ final class PerDayCell: UICollectionViewCell {
     
     private let roundedView: UIView = {
         let circle = UIView()
-        let path = UIBezierPath(arcCenter: CGPoint(x: 24, y: 24), radius: 24, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+        let path = UIBezierPath(arcCenter: CGPoint(x: 24, y: 24),
+                                radius: 24,
+                                startAngle: CGFloat(0),
+                                endAngle: CGFloat(Double.pi * 2),
+                                clockwise: true)
         let circleLayer = CAShapeLayer()
         circleLayer.path = path.cgPath
         circleLayer.fillColor = UIColor(hex: "#9ab6ffff")?.cgColor

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct PerDayModel{
+struct PerDayModel {
     var image: String
     var date: Int
     var state: String

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppNavigationController: UINavigationController{
+class AppNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarHidden(true, animated: false)

@@ -7,17 +7,17 @@
 
 import UIKit
 
-enum SecId: Int, CaseIterable{
+enum SecId: Int, CaseIterable {
     case currentDaySection
     case perHourWeatherSection
 }
 
-enum CId{
+enum CId {
     case currentDayCell
     case perHourWeatherCell
     
     func reuseId() -> String{
-        switch self{
+        switch self {
             case .currentDayCell:
                 return "currentDayCell"
             case .perHourWeatherCell:
@@ -69,22 +69,22 @@ class DetailController: UIViewController {
         detailCollectionView.backgroundView = background
     }
     
-    func createCollectionView(){
+    func createCollectionView() {
         detailCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
         detailCollectionView.delegate = self
     }
     
-    func registerViews(){
+    func registerViews() {
         detailCollectionView.register(CurrentDayCell.self, forCellWithReuseIdentifier: CId.currentDayCell.reuseId())
         detailCollectionView.register(PerHourWeatherCell.self, forCellWithReuseIdentifier: CId.perHourWeatherCell.reuseId())
     }
     
-    func addSubviews(){
+    func addSubviews() {
         view.backgroundColor = .white
         view.addSubview(detailCollectionView)
     }
     
-    func layoutSubviews(){
+    func layoutSubviews() {
         detailCollectionView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -95,16 +95,19 @@ class DetailController: UIViewController {
         ])
     }
     
-    func createDataSource(){
-        let source = UICollectionViewDiffableDataSource<SecId, UUID>(collectionView: detailCollectionView) { (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: UUID) -> UICollectionViewCell? in
+    func createDataSource() {
+        let source = UICollectionViewDiffableDataSource<SecId, UUID>(collectionView: detailCollectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: UUID) -> UICollectionViewCell? in
             switch SecId(rawValue: indexPath.section)!{
                 case .currentDaySection:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.currentDayCell.reuseId(), for: indexPath) as? CurrentDayCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.currentDayCell.reuseId(),
+                                                                  for: indexPath) as? CurrentDayCell
                     cell?.setupView()
                     cell?.removeBackground()
                     return cell
                 case .perHourWeatherSection:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.perHourWeatherCell.reuseId(), for: indexPath) as? PerHourWeatherCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.perHourWeatherCell.reuseId(),
+                                                                  for: indexPath) as? PerHourWeatherCell
                     cell?.setupView()
                     return cell
             }
@@ -113,7 +116,7 @@ class DetailController: UIViewController {
         dataSource = source
     }
     
-    func reloadData(){
+    func reloadData() {
         var snapshot = NSDiffableDataSourceSnapshot<SecId, UUID>()
         snapshot.appendSections([.currentDaySection, .perHourWeatherSection])
         
@@ -130,7 +133,7 @@ class DetailController: UIViewController {
         dataSource.apply(snapshot)
     }
     
-    func createCompositionalLayout() -> UICollectionViewLayout{
+    func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             switch SecId(rawValue: sectionIndex)! {
             case .currentDaySection:

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct PerHourWeatherModel{
+struct PerHourWeatherModel {
     var image: String
     var temperature: Int
     var time: String
