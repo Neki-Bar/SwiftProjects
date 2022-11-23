@@ -15,6 +15,11 @@
 		1765E4A328E9C38100A228D0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765E4A228E9C38100A228D0 /* HomeViewController.swift */; };
 		1765E4A828E9C38300A228D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1765E4A728E9C38300A228D0 /* Assets.xcassets */; };
 		1765E4AB28E9C38300A228D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1765E4A928E9C38300A228D0 /* LaunchScreen.storyboard */; };
+		17A5E253292E83A800B89670 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5E252292E83A800B89670 /* Unit.swift */; };
+		17A5E255292E9BAD00B89670 /* PerDayModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5E254292E9BAD00B89670 /* PerDayModelContainer.swift */; };
+		17A5E258292EA11100B89670 /* UICurrentDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5E257292EA11100B89670 /* UICurrentDayModel.swift */; };
+		17A5E25A292EA18100B89670 /* UIPerHourWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5E259292EA18100B89670 /* UIPerHourWeatherModel.swift */; };
+		17A5E25C292EA1BE00B89670 /* UIPerDayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A5E25B292EA1BE00B89670 /* UIPerDayModel.swift */; };
 		17F0F0DD28F874DC00270D38 /* SectionTitleSupplementary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F0F0DC28F874DC00270D38 /* SectionTitleSupplementary.swift */; };
 		17FF2A5B28EC1E9700C9BBC2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A5A28EC1E9700C9BBC2 /* Coordinator.swift */; };
 		17FF2A5D28EC216700C9BBC2 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A5C28EC216700C9BBC2 /* HomeCoordinator.swift */; };
@@ -23,7 +28,6 @@
 		17FF2A6328EC22EF00C9BBC2 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A6228EC22EF00C9BBC2 /* AppCoordinator.swift */; };
 		17FF2A6728EC298600C9BBC2 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A6628EC298600C9BBC2 /* DetailViewModel.swift */; };
 		17FF2A6928EC299B00C9BBC2 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A6828EC299B00C9BBC2 /* HomeViewModel.swift */; };
-		17FF2A6F28F04A8B00C9BBC2 /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A6E28F04A8B00C9BBC2 /* AppNavigationController.swift */; };
 		17FF2A7228F08F2800C9BBC2 /* CurrentDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A7128F08F2800C9BBC2 /* CurrentDayCell.swift */; };
 		17FF2A7428F0959800C9BBC2 /* PerHourWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A7328F0959800C9BBC2 /* PerHourWeatherCell.swift */; };
 		17FF2A7628F095E000C9BBC2 /* PerDayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FF2A7528F095E000C9BBC2 /* PerDayCell.swift */; };
@@ -45,6 +49,11 @@
 		1765E4A728E9C38300A228D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1765E4AA28E9C38300A228D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1765E4AC28E9C38300A228D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17A5E252292E83A800B89670 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		17A5E254292E9BAD00B89670 /* PerDayModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerDayModelContainer.swift; sourceTree = "<group>"; };
+		17A5E257292EA11100B89670 /* UICurrentDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICurrentDayModel.swift; sourceTree = "<group>"; };
+		17A5E259292EA18100B89670 /* UIPerHourWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPerHourWeatherModel.swift; sourceTree = "<group>"; };
+		17A5E25B292EA1BE00B89670 /* UIPerDayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPerDayModel.swift; sourceTree = "<group>"; };
 		17F0F0DC28F874DC00270D38 /* SectionTitleSupplementary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTitleSupplementary.swift; sourceTree = "<group>"; };
 		17FF2A5A28EC1E9700C9BBC2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		17FF2A5C28EC216700C9BBC2 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -53,7 +62,6 @@
 		17FF2A6228EC22EF00C9BBC2 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		17FF2A6628EC298600C9BBC2 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		17FF2A6828EC299B00C9BBC2 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		17FF2A6E28F04A8B00C9BBC2 /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
 		17FF2A7128F08F2800C9BBC2 /* CurrentDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDayCell.swift; sourceTree = "<group>"; };
 		17FF2A7328F0959800C9BBC2 /* PerHourWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerHourWeatherCell.swift; sourceTree = "<group>"; };
 		17FF2A7528F095E000C9BBC2 /* PerDayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerDayCell.swift; sourceTree = "<group>"; };
@@ -140,9 +148,12 @@
 		1765E4B228E9C40400A228D0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				17A5E256292EA0E500B89670 /* UIModels */,
 				17FF2A7728F4AA9E00C9BBC2 /* CurrentDayModel.swift */,
 				17FF2A7928F4AAC100C9BBC2 /* PerHourWeatherModel.swift */,
 				17FF2A7B28F4AAD800C9BBC2 /* PerDayModel.swift */,
+				17A5E252292E83A800B89670 /* Unit.swift */,
+				17A5E254292E9BAD00B89670 /* PerDayModelContainer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -162,9 +173,18 @@
 			children = (
 				1765E49E28E9C38100A228D0 /* AppDelegate.swift */,
 				17FF2A6228EC22EF00C9BBC2 /* AppCoordinator.swift */,
-				17FF2A6E28F04A8B00C9BBC2 /* AppNavigationController.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		17A5E256292EA0E500B89670 /* UIModels */ = {
+			isa = PBXGroup;
+			children = (
+				17A5E257292EA11100B89670 /* UICurrentDayModel.swift */,
+				17A5E259292EA18100B89670 /* UIPerHourWeatherModel.swift */,
+				17A5E25B292EA1BE00B89670 /* UIPerDayModel.swift */,
+			);
+			path = UIModels;
 			sourceTree = "<group>";
 		};
 		17F0F0DA28F873BF00270D38 /* Cells */ = {
@@ -363,16 +383,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A5E25C292EA1BE00B89670 /* UIPerDayModel.swift in Sources */,
+				17A5E25A292EA18100B89670 /* UIPerHourWeatherModel.swift in Sources */,
 				1718E1F3290830AD007D063F /* WeatherTarget.swift in Sources */,
 				17FF2A7428F0959800C9BBC2 /* PerHourWeatherCell.swift in Sources */,
 				1718E1F029081F00007D063F /* Dynamic.swift in Sources */,
 				1718E1F7290A9F8D007D063F /* AccuWeather.swift in Sources */,
 				1765E4A328E9C38100A228D0 /* HomeViewController.swift in Sources */,
 				17FF2A6928EC299B00C9BBC2 /* HomeViewModel.swift in Sources */,
+				17A5E253292E83A800B89670 /* Unit.swift in Sources */,
 				17FF2A5D28EC216700C9BBC2 /* HomeCoordinator.swift in Sources */,
-				17FF2A6F28F04A8B00C9BBC2 /* AppNavigationController.swift in Sources */,
 				17FF2A7628F095E000C9BBC2 /* PerDayCell.swift in Sources */,
 				17FF2A7228F08F2800C9BBC2 /* CurrentDayCell.swift in Sources */,
+				17A5E258292EA11100B89670 /* UICurrentDayModel.swift in Sources */,
 				1765E49F28E9C38100A228D0 /* AppDelegate.swift in Sources */,
 				17FF2A6728EC298600C9BBC2 /* DetailViewModel.swift in Sources */,
 				17FF2A5F28EC219200C9BBC2 /* DetailCoordinator.swift in Sources */,
@@ -383,6 +406,7 @@
 				17F0F0DD28F874DC00270D38 /* SectionTitleSupplementary.swift in Sources */,
 				17FF2A5B28EC1E9700C9BBC2 /* Coordinator.swift in Sources */,
 				17FF2A6328EC22EF00C9BBC2 /* AppCoordinator.swift in Sources */,
+				17A5E255292E9BAD00B89670 /* PerDayModelContainer.swift in Sources */,
 				1718E1FA29265ED2007D063F /* Animator.swift in Sources */,
 				17FF2A7828F4AA9E00C9BBC2 /* CurrentDayModel.swift in Sources */,
 			);

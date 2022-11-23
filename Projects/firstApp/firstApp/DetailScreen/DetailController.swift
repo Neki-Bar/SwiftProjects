@@ -102,13 +102,13 @@ class DetailController: UIViewController {
                 case .currentDaySection:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.currentDayCell.reuseId(),
                                                                   for: indexPath) as? CurrentDayCell
-                    cell?.setupView()
-                    cell?.removeBackground()
+//                    cell?.setupView()
+//                    cell?.removeBackground()
                     return cell
                 case .perHourWeatherSection:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CId.perHourWeatherCell.reuseId(),
                                                                   for: indexPath) as? PerHourWeatherCell
-                    cell?.setupView()
+//                    cell?.setupView()
                     return cell
             }
         }

@@ -38,8 +38,20 @@ extension AccuWeather: TargetType {
     }
     
     public var task: Task {
-        return .requestParameters(parameters: ["apikey": "xlxkAAypGLgP1X5eALMhT4xtRWkEQbzp"],
-                                  encoding: URLEncoding.default)
+        switch self {
+        case .current:
+            return .requestParameters(parameters: ["apikey": "xlxkAAypGLgP1X5eALMhT4xtRWkEQbzp"],
+                                      encoding: URLEncoding.default)
+        case .hourly:
+            return .requestParameters(parameters: ["apikey": "xlxkAAypGLgP1X5eALMhT4xtRWkEQbzp",
+                                                   "metric": "true"],
+                                      encoding: URLEncoding.default)
+        case .daily:
+            return .requestParameters(parameters: ["apikey": "xlxkAAypGLgP1X5eALMhT4xtRWkEQbzp",
+                                                   "metric": "true"],
+                                      encoding: URLEncoding.default)
+        }
+        
     }
     
     public var sampleData: Data {

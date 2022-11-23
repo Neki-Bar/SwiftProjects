@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PerHourWeatherCell: UICollectionViewCell{
+final class PerHourWeatherCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     }
@@ -37,17 +37,23 @@ final class PerHourWeatherCell: UICollectionViewCell{
         return label
     }()
     
-    public func setupView(){
+    func setupView(from model: UIPerHourWeatherModel) {
+       //weatherIcon
+        temperatureLabel.text = model.temperature
+        timeLabel.text = model.time
+    }
+    
+    func configure() {
         setupLayer()
         setupLayout()
     }
     
-    private func setupLayer(){
+    private func setupLayer() {
         self.backgroundColor = UIColor(hex: "#fbfbfbff")
         self.layer.cornerRadius = 4
     }
     
-    private func setupLayout(){
+    private func setupLayout() {
         contentView.addSubview(weatherIcon)
         contentView.addSubview(temperatureLabel)
         contentView.addSubview(timeLabel)

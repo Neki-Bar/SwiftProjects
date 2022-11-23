@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Animator: NSObject, UIViewControllerAnimatedTransitioning {
+final class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
     let present: Bool!
     

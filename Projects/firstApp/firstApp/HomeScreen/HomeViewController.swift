@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
     
     
     var list1 = [UUID()]
-    var list2 = [UUID(), UUID(), UUID(), UUID(), UUID(), UUID()]
+    var list2 = [UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID()]
     var list3 = [UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID(), UUID()]
     
     init(viewModel: HomeViewModel, coordinator: HomeCoordinator) {
@@ -79,6 +79,10 @@ final class HomeViewController: UIViewController {
         
         navigationController?.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        reloadData()
+    }
 
     func createCollectionView(){
         homeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCompositionalLayout())
@@ -102,12 +106,36 @@ final class HomeViewController: UIViewController {
                 case .currentDaySection:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.currentDayCell.reuseId(),
                                                                   for: indexPath) as? CurrentDayCell
-                    cell?.setupView()
+                    if let model = self.viewModel.currentDayModel {
+                        if !model.isBinded {
+                            model.bind({ model in
+                                DispatchQueue.main.async{
+                                    cell?.setupView(from: model)
+                                }
+                            })
+                            model.emitChange()
+                        }
+                    }
+                   
+                    cell?.configure()
                     return cell
                 case .perHourWeatherSection:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perHourWeatherCell.reuseId(),
                                                                   for: indexPath) as? PerHourWeatherCell
-                    cell?.setupView()
+                    if let models = self.viewModel.perHourModels {
+                        let index = indexPath.row
+                        let model = models[index]
+                        if !model.isBinded{
+                            model.bind({ model in
+                                DispatchQueue.main.async{
+                                    cell?.setupView(from: model)
+                                }
+                            })
+                            model.emitChange()
+                        }
+                    }
+                    
+                    cell?.configure()
                     return cell
                 case .perDaySection:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellId.perDayCell.reuseId(),
